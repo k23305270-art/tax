@@ -35,6 +35,11 @@ import {
   Obstacle 
 } from '../types';
 
+const getPublicAssetUrl = (assetPath: string) => {
+  const baseUrl = (import.meta as ImportMeta & { env?: { BASE_URL?: string } }).env?.BASE_URL ?? '/';
+  return `${baseUrl}${assetPath.replace(/^\/+/, '')}`;
+};
+
 // ==========================================
 // ==========================================
 // 整合 Howler.js 與 瀏覽器 Web Audio API
@@ -71,7 +76,7 @@ class SoundSynth {
     try {
       // 科技感 Synthwave 背景音樂 (Loop)
       this.bgm = new Howl({
-        src: ['/sounds/bgm.wav.mp3', '/sounds/bgm.mp3', '/sounds/bgm.wav'],
+        src: [getPublicAssetUrl('sounds/bgm.wav.mp3'), getPublicAssetUrl('sounds/bgm.mp3'), getPublicAssetUrl('sounds/bgm.wav')],
         loop: true,
         volume: 0.3,
         html5: true,
@@ -81,7 +86,7 @@ class SoundSynth {
 
       // 拾取智慧鎖金鑰音效
       this.keySound = new Howl({
-        src: ['/sounds/key.wav', '/sounds/key.mp3'],
+        src: [getPublicAssetUrl('sounds/key.wav'), getPublicAssetUrl('sounds/key.mp3')],
         volume: 0.4,
         onload: () => { this.hasKeyLoaded = true; },
         onloaderror: () => { this.hasKeyLoaded = false; }
@@ -89,7 +94,7 @@ class SoundSynth {
 
       // 答對 Bingo 音效
       this.bingoSound = new Howl({
-        src: ['/sounds/bingo.wav', '/sounds/bingo.mp3'],
+        src: [getPublicAssetUrl('sounds/bingo.wav'), getPublicAssetUrl('sounds/bingo.mp3')],
         volume: 0.5,
         onload: () => { this.hasBingoLoaded = true; },
         onloaderror: () => { this.hasBingoLoaded = false; }
@@ -97,7 +102,7 @@ class SoundSynth {
 
       // 被鎖定警報音效
       this.alertSound = new Howl({
-        src: ['/sounds/alert.wav', '/sounds/alert.mp3'],
+        src: [getPublicAssetUrl('sounds/alert.wav'), getPublicAssetUrl('sounds/alert.mp3')],
         volume: 0.45,
         onload: () => { this.hasAlertLoaded = true; },
         onloaderror: () => { this.hasAlertLoaded = false; }
@@ -105,7 +110,7 @@ class SoundSynth {
 
       // 玩家死亡音效
       this.deathSound = new Howl({
-        src: ['/sounds/death.wav', '/sounds/death.mp3'],
+        src: [getPublicAssetUrl('sounds/death.wav'), getPublicAssetUrl('sounds/death.mp3')],
         volume: 0.5,
         onload: () => { this.hasDeathLoaded = true; },
         onloaderror: () => { this.hasDeathLoaded = false; }
@@ -113,7 +118,7 @@ class SoundSynth {
 
       // 勝利逃脫音效
       this.victorySound = new Howl({
-        src: ['/sounds/victory.wav', '/sounds/victory.mp3'],
+        src: [getPublicAssetUrl('sounds/victory.wav'), getPublicAssetUrl('sounds/victory.mp3')],
         volume: 0.5,
         onload: () => { this.hasVictoryLoaded = true; },
         onloaderror: () => { this.hasVictoryLoaded = false; }
@@ -121,7 +126,7 @@ class SoundSynth {
 
       // 衝刺推進音效
       this.sprintSound = new Howl({
-        src: ['/sounds/sprint.wav', '/sounds/sprint.mp3'],
+        src: [getPublicAssetUrl('sounds/sprint.wav'), getPublicAssetUrl('sounds/sprint.mp3')],
         volume: 0.35,
         onload: () => { this.hasSprintLoaded = true; },
         onloaderror: () => { this.hasSprintLoaded = false; }
@@ -669,15 +674,15 @@ export default function ChaseGame() {
   // 載入遊戲圖形資源 (支援非同步載入，加載完成即在 Canvas 自動渲染新材質)
   useEffect(() => {
     const imgPlayer = new Image();
-    imgPlayer.src = '/images/tax_agent.jpg';
+    imgPlayer.src = getPublicAssetUrl('images/tax_agent.jpg');
     imgPlayer.onload = () => { playerImageRef.current = imgPlayer; };
 
     const imgEnemy = new Image();
-    imgEnemy.src = '/images/evader.jpg';
+    imgEnemy.src = getPublicAssetUrl('images/evader.jpg');
     imgEnemy.onload = () => { enemyImageRef.current = imgEnemy; };
 
     const imgKey = new Image();
-    imgKey.src = '/images/tax_key.jpg';
+    imgKey.src = getPublicAssetUrl('images/tax_key.jpg');
     imgKey.onload = () => { keyImageRef.current = imgKey; };
   }, []);
 
@@ -2448,7 +2453,7 @@ export default function ChaseGame() {
         <div className="flex items-center space-x-2 sm:space-x-2.5 w-full sm:w-auto">
           <div className="w-10 h-10 sm:w-14 sm:h-14 bg-white/5 border border-white/10 rounded-lg overflow-hidden flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.2)] shrink-0 transition-transform hover:scale-105 duration-300">
             <img 
-              src="/images/photo1.jpg" 
+              src={getPublicAssetUrl('images/photo1.jpg')} 
               alt="Tax Agent Game Logo" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
@@ -2843,7 +2848,7 @@ export default function ChaseGame() {
               {/* 遊戲頂部高科技精美橫幅 - 手機上縮小高度 */}
               <div className="w-[calc(100%+2.5rem)] md:w-[calc(100%+3rem)] h-16 xs:h-24 sm:h-28 -mx-5 md:-mx-6 mb-3 overflow-hidden relative border-b border-white/10 shrink-0">
                 <img 
-                  src="/images/hero_banner.jpg" 
+                  src={getPublicAssetUrl('images/hero_banner.jpg')} 
                   alt="Tax Agent Game Banner" 
                   className="w-full h-full object-cover object-center"
                   referrerPolicy="no-referrer"
@@ -2862,7 +2867,7 @@ export default function ChaseGame() {
                 </span>
                 <div className="w-9 h-9 xs:w-11 xs:h-11 rounded-lg overflow-hidden border border-cyan-500/30 shadow-[0_0_10px_rgba(34,211,238,0.2)] shrink-0 bg-slate-950 flex items-center justify-center">
                   <img 
-                    src="/images/photo1.jpg" 
+                    src={getPublicAssetUrl('images/photo1.jpg')} 
                     alt="Tax Agent Game Logo" 
                     className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"

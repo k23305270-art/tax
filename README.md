@@ -1,20 +1,18 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Tax Game
 
-# Run and deploy your AI Studio app
+這是一個 Vite + React 的遊戲專案，已調整為可直接部署到 GitHub Pages。
 
-This contains everything you need to run your app locally.
+## 本機開發
 
-View your app in AI Studio: https://ai.studio/apps/e8f58101-5cf6-489d-8b19-05e2d451f397
+1. 安裝依賴：`npm install`
+2. 啟動開發伺服器：`npm run dev`
 
-## Run Locally
+## GitHub Pages 部署
 
-**Prerequisites:**  Node.js
+此專案會在推送到 `main` 分支時，自動透過 GitHub Actions 建置並部署到 GitHub Pages。
 
+部署後網址會是：
+https://k23305270-art.github.io/tax/
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+如需手動建置，請執行：
+`npm run build`
