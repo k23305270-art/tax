@@ -1,0 +1,8 @@
+{
+  "name": "Remix: Remix: Remix: Remix: Remix: Remix: Remix: 末日逃生追殺小遊戲",
+  "description": "這是一款 2D 俯視角（Top-down）的末日逃生追殺 Canvas 小遊戲。玩家需要利用走位與衝刺，避開巡邏與追擊的敵人，尋找鑰匙並開啟逃生大門！",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
